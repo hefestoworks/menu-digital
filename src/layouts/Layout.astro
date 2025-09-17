@@ -1,0 +1,81 @@
+---
+import { menuData } from '../data/menu.js';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+    description: string;
+}
+
+const { title, description } = Astro.props;
+// Construccion de datos para Schema Markup
+
+const menuItemsForSchema = menuData.flatMap(category => 
+  category.items.map(item => ({
+    "@type": "MenuItem",
+    "name": item.name,
+    "description": item.description,
+    "offers": {
+      "@type": "Offer",
+      // Extraemos solo los números del precio
+      "price": item.price.replace(/[^\d]/g, ''), 
+      "priceCurrency": "PYG" // Asumimos la moneda
+    }
+  }))
+);
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "El Bar Secreto",
+  "servesCuisine": "Cócteles",
+  "menu": Astro.url.href,
+  "hasMenu": {
+    "@type": "Menu",
+    "name": "Carta Principal",
+    "hasMenuItem": menuItemsForSchema
+  }
+};
+
+//Script para evitar parpadeo al cambiar a modo oscuro
+
+---
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {/* Google Fonts */}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+        <script type="application/ld+json" is:inline>
+            {JSON.stringify(schemaData)}
+            {/* Script para manejar el tema claro/oscuro */}
+              const theme = (() => {
+                if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+                  return localStorage.getItem('theme');
+                }
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  return 'dark';
+                }
+                return 'light';
+              })();
+
+              if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+  
+        </script>
+	</head>
+	<body class="bg-gray-900 text-white">
+		<slot />
+	</body>
+</html>
