@@ -4,27 +4,26 @@ const { title, description, price, image } = Astro.props;
 ---
 
 <div
-  class="overflow-hidden transition-shadow duration-300 border bg-card rounded-lg shadow-sm hover:shadow-lg group"
+  class="overflow-hidden transition-all duration-300 rounded-lg shadow-sm hover:scale-105 hover:shadow-lg"
 >
   <div class="relative w-full h-64">
-    {/* Pasa todas las props de la imagen directamente */}
     <Image
       src={image}
       alt={title}
       widths={[320, 640, 960]}
       sizes="(max-width: 640px) 100vw, 640px"
       format="webp"
-      class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+      class="object-cover w-full h-full"
       loading="lazy"
     />
   </div>
 
   <div class="p-4">
-    <h3 class="text-lg font-semibold text-primary truncate font-heading">
+    <h3 class="text-lg font-semibold truncate text-secondary-500 font-heading">
       {title}
     </h3>
-    <p class="text-sm text-secondary mt-1 font-body">{description}</p>
-    <p class="mt-2 text-xl font-bold text-primary font-body">
+    <p class="mt-1 text-sm text-secondary font-body">{description}</p>
+    <p class="mt-2 text-xl font-bold text-primary-500 font-body">
       {price}
     </p>
   </div>

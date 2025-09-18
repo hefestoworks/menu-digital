@@ -2,25 +2,27 @@
 import ThemeToggle from "./ThemeToggle.astro";
 import logo from "../assets/logo.png";
 import { Image } from "astro:assets";
-
-const { title = "Restaurante" } = Astro.props; // Prop para personalizar el título
+const { title = "El Bar Secreto" } = Astro.props;
 ---
 
 <header
-  class="bg-background text-text-primary shadow-md sticky top-0 z-10 font-body rounded-lg"
+  class="sticky top-0 z-10 rounded-lg shadow-md bg-background dark: bg-background-dark text-text-primary font-body"
 >
-  <div
-    class="container mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between"
-  >
+  <div class="container flex items-center justify-between px-4 py-6 mx-auto">
     <!-- Logo y Título -->
     <div class="flex items-center space-x-4">
-      <Image src={logo} alt="Logo Restaurante" class="h-12 w-auto" />
+      <Image
+        src={logo}
+        alt="Logo del bar"
+        class="w-12 h-12"
+        loading={"eager"}
+      />
       <h1 class="text-2xl font-bold text-primary font-heading">{title}</h1>
     </div>
 
     <!-- Dirección y Teléfono -->
     <div
-      class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 mt-4 md:mt-0 text-secondary"
+      class="flex flex-col items-center mt-4 space-y-2 md:flex-row md:space-y-0 md:space-x-6 md:mt-0 text-secondary"
     >
       <div class="flex items-center space-x-2">
         <svg
@@ -72,20 +74,25 @@ const { title = "Restaurante" } = Astro.props; // Prop para personalizar el tít
     <!-- Toggle de Tema (usando el componente existente) -->
     <div class="flex items-center space-x-2">
       <ThemeToggle />
-      <span id="theme-text" class="text-sm text-secondary font-body"
-        >Modo Claro</span
-      >
+      <span id="theme-text" class="text-sm text-secondary font-body"></span>
     </div>
   </div>
 </header>
 
-<style>
-  /* Transiciones suaves para el cambio de tema */
-  .bg-background,
-  .text-text-primary,
-  .bg-card {
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease;
+<script>
+  const themeText = document.getElementById("theme-text");
+  const toggleButton = document.getElementById("theme-toggle");
+
+  if (themeText && toggleButton) {
+    const updateThemeText = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      themeText.textContent = isDark ? "Modo Oscuro" : "Modo Claro";
+    };
+
+    // Actualiza el texto al cargar la página
+    document.addEventListener("DOMContentLoaded", updateThemeText);
+
+    // Actualiza el texto al hacer clic en el botón
+    toggleButton.addEventListener("click", updateThemeText);
   }
-</style>
+</script>
