@@ -1,39 +1,30 @@
 ---
 import { Image } from "astro:assets";
-// 1. Importa 'ComponentProps' desde 'astro/types'
-import type { ComponentProps } from "astro/types";
-
-// 2. Define las props que son exclusivas de TU componente
-interface CustomProps {
-  price: string | number;
-  description: string;
-}
-
-// 3. Crea el tipo final combinando los tipos de <Image> y los tuyos
-type Props = ComponentProps<typeof Image> & CustomProps;
-
-// 4. Separa las props personalizadas del resto (que son para la imagen)
-const { price, description, ...imageProps } = Astro.props;
-const title = imageProps.alt; // Reutilizamos el 'alt' de la imagen como título
+const { title, description, price, image } = Astro.props;
 ---
 
 <div
-  class="overflow-hidden transition-shadow duration-300 border border-gray-200 rounded-lg shadow-sm hover:shadow-lg group"
+  class="overflow-hidden transition-shadow duration-300 border bg-card rounded-lg shadow-sm hover:shadow-lg group"
 >
   <div class="relative w-full h-64">
     {/* Pasa todas las props de la imagen directamente */}
     <Image
-      {...imageProps}
+      src={image}
+      alt={title}
+      widths={[320, 640, 960]}
+      sizes="(max-width: 640px) 100vw, 640px"
+      format="webp"
       class="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+      loading="lazy"
     />
   </div>
 
   <div class="p-4">
-    <h3 class="text-lg font-semibold text-amber-600 truncate">
+    <h3 class="text-lg font-semibold text-primary truncate font-heading">
       {title}
     </h3>
-    <p class="text-sm text-gray-300 mt-1">{description}</p>
-    <p class="mt-2 text-xl font-bold text-amber-400">
+    <p class="text-sm text-secondary mt-1 font-body">{description}</p>
+    <p class="mt-2 text-xl font-bold text-primary font-body">
       {price}
     </p>
   </div>

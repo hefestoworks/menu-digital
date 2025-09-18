@@ -11,11 +11,11 @@ import DrinkCard from "../components/DrinkCard.astro";
 >
   <main class="container mx-auto px-4 py-12">
     <Header />
-    <div class="space-y-12">
+    <div class="space-y-12 py-4">
       {
         menuData.map((category) => (
           <section>
-            <h2 class="text-3xl font-semibold border-b-2 border-yellow-500 pb-2 mb-6">
+            <h2 class="text-3xl font-semibold border-b-2 font-heading border-primary pb-2 mb-6">
               {category.category}
             </h2>
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -23,10 +23,8 @@ import DrinkCard from "../components/DrinkCard.astro";
                 <DrinkCard
                   price={item.price}
                   description={item.description}
-                  src={item.image.src}
-                  alt={item.name}
-                  width={item.image.width}
-                  height={item.image.height}
+                  image={item.image}
+                  title={item.name}
                 />
               ))}
             </div>
