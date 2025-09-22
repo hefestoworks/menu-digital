@@ -3,28 +3,35 @@ import { Image } from "astro:assets";
 const { title, description, price, image } = Astro.props;
 ---
 
-<div
-  class="transition-all duration-300 rounded-lg shadow-sm hover:scale-105 hover:shadow-lg"
+<article
+  class="overflow-hidden transition-all duration-300 bg-[var(--background-color)] border border-transparent shadow-md rounded-xl hover:scale-105 hover:shadow-xl hover:border-secondary-300"
 >
-  <div class="relative w-full h-64 overflow-hidden rounded-t-lg">
+  <figure class="relative w-full h-64 overflow-hidden">
     <Image
       src={image}
       alt={title}
-      widths={[320, 640, 960]}
-      sizes="(max-width: 640px) 100vw, 640px"
       format="webp"
-      class="object-cover w-full h-full"
+      class="object-contain w-full h-full"
       loading="lazy"
     />
-  </div>
+  </figure>
 
-  <div class="p-4">
-    <h3 class="text-lg font-semibold truncate text-secondary-500 font-heading">
+  <div class="h-full p-4 bg-gradient-to-t from-neutral-50 to-neutral-300">
+    <h3
+      class="text-lg font-bold tracking-tight truncate text-neutral-800 dark:text-neutral-100 font-heading"
+    >
       {title}
     </h3>
-    <p class="mt-1 text-sm text-secondary font-body">{description}</p>
-    <p class="mt-2 text-xl font-bold text-primary-500 font-body">
-      {price}
+    <p class="mt-1 text-sm text-neutral-800 dark:text-neutral-500 font-body">
+      {description}
     </p>
+    <div class="flex items-center mt-3">
+      <span class="inline-block w-8 h-px mr-3 bg-secondary-300"></span>
+      <p
+        class="mt-2 text-2xl font-extrabold tracking-tight text-secondary-500 font-heading"
+      >
+        {price}
+      </p>
+    </div>
   </div>
-</div>
+</article>

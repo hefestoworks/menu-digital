@@ -28,7 +28,16 @@ const schemaData = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "name": "El Bar Secreto",
-  "servesCuisine": "Cócteles",
+  "servesCuisine": "Cócteles Artesanales",
+  "url": "https://tu-menusitio.com",
+  "logo": "../assets/logo.pnglogo.png",
+  "telephone": "+1234567890",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. Principal 123",
+    "addressLocality": "Ciudad",
+    "addressCountry": "PY"
+  },
   "menu": Astro.url.href,
   "hasMenu": {
     "@type": "Menu",
@@ -78,7 +87,7 @@ const schemaData = {
   
     </script>
 	</head>
-	<body>
+	<body  >
 		<slot />
 	</body>
 </html>

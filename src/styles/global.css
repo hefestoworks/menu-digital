@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
-  --brand-primary: #ffcc33;
-  --brand-secondary: #14182f;
+  --brand-primary: #10b981;
+  --brand-secondary: #f59e0b;
   --brand-neutral: #91a3b0;
 
   /* pallet brand */
