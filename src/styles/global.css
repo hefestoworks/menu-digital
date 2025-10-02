@@ -32,45 +32,46 @@
   --color-neutral-800: oklch(from var(--brand-neutral) 30% c h);
   --color-neutral-900: oklch(from var(--brand-neutral) 15% c h);
 
-  /* color scheme*/
-  --foreground-color: light-dark(
-    var(--color-neutral-800),
-    var(--color-neutral-100)
-  );
-  --background-color: light-dark(
-    var(--color-neutral-100),
-    var(--color-neutral-900)
-  );
-  --icon-color: light-dark(var(--color-neutral-800), var(--color-neutral-100));
-  --link-color: light-dark(
-    var(--color-primary-400),
-    var(--color-secondary-100)
-  );
-  --link-hover-color: light-dark(
-    var(--color-primary-300),
-    var(--color-secondary-200)
-  );
-  --border-color: light-dark(
-    var(--color-neutral-900),
-    var(--color-neutral-100)
-  );
-  --border-color-subtle: light-dark(
-    var(--color-neutral-300),
-    var(--color-neutral-800)
-  );
-  --text-decoration-color: light-dark(
-    var(--color-neutral-700),
-    var(--color-neutral-100)
-  );
-  --text-decoration-color-hover: light-dark(
-    var(--color-neutral-100),
-    var(--color-neutral-200)
-  );
-
   /*Font Family*/
   --font-family-default: "Lato", sans-serif;
   --font-family-special: "Lora", serif;
 
   --font-heading: var(--font-family-special);
   --font-body: var(--font-family-default);
+}
+
+/* Light mode colors (default) */
+:root {
+  --foreground-color: var(--color-neutral-900);
+  --background-color: var(--color-neutral-100);
+  --background-color-dark: var(--color-neutral-200);
+  --icon-color: var(--color-neutral-900);
+  --link-color: var(--color-primary-600);
+  --link-hover-color: var(--color-primary-800);
+  --border-color: var(--color-neutral-300);
+  --border-color-subtle: var(--color-neutral-200);
+  --text-decoration-color: var(--color-primary-600);
+  --text-decoration-color-hover: var(--color-primary-800);
+  --text-primary: var(--color-neutral-900);
+  --text-secondary: var(--color-neutral-600);
+  --surface-color: #ffffff;
+  --surface-secondary: var(--color-neutral-100);
+}
+
+/* Dark mode overrides */
+.dark {
+  --foreground-color: var(--color-neutral-100);
+  --background-color: var(--color-neutral-900);
+  --background-color-dark: var(--color-neutral-800);
+  --icon-color: var(--color-neutral-100);
+  --link-color: var(--color-secondary-300);
+  --link-hover-color: var(--color-secondary-200);
+  --border-color: var(--color-neutral-700);
+  --border-color-subtle: var(--color-neutral-800);
+  --text-decoration-color: var(--color-secondary-300);
+  --text-decoration-color-hover: var(--color-secondary-200);
+  --text-primary: var(--color-neutral-100);
+  --text-secondary: var(--color-neutral-300);
+  --surface-color: var(--color-neutral-800);
+  --surface-secondary: var(--color-neutral-700);
 }

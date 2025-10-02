@@ -42,21 +42,34 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const toggleButton = document.querySelector(".theme-toggle-btn");
-    if (!toggleButton) return;
+    if (!toggleButton) {
+      console.error("Theme toggle button not found!");
+      return;
+    }
 
     // Aplica tema guardado o del sistema
     const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
 
-    document.documentElement.classList.toggle("dark", isDark);
+    console.log("Initial theme state:", { savedTheme, prefersDark, isDark });
+
+    // Apply initial theme
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
 
     // Alterna tema al hacer clic
     toggleButton.addEventListener("click", () => {
-      const isNowDark = document.documentElement.classList.toggle("dark");
+      const isNowDark = !document.documentElement.classList.contains("dark");
+      document.documentElement.classList.toggle("dark");
       localStorage.setItem("theme", isNowDark ? "dark" : "light");
+      console.log("Theme toggled to:", isNowDark ? "dark" : "light");
+
+      // Force re-render by triggering a custom event
+      window.dispatchEvent(new CustomEvent("themeChanged"));
     });
   });
 </script>

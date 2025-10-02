@@ -20,7 +20,8 @@ const { title = "El Bar Secreto" } = Astro.props;
         loading={"eager"}
       />
       <h1
-        class="text-3xl font-black tracking-tight transition-colors text-primary-800 font-heading group-hover:text-primary-600"
+        class="text-3xl font-black tracking-tight transition-colors font-heading group-hover:text-[var(--link-hover-color)]"
+        style="color: var(--brand-primary);"
       >
         {title}
       </h1>
@@ -28,16 +29,16 @@ const { title = "El Bar Secreto" } = Astro.props;
 
     <!-- Dirección y Teléfono -->
     <div
-      class="flex flex-col items-center space-y-3 md:flex-row md:space-y-0 md:space-x-8 text-secondary"
+      class="flex flex-col items-center space-y-3 md:flex-row md:space-y-0 md:space-x-8"
     >
       <a
         href="https://maps.app.goo.gl/DWhpfU1qDi7imN2U6"
         target="_blank"
-        class="flex items-center space-x-2 transition-colors hover:text-primary group"
+        class="flex items-center space-x-2 transition-all duration-300 hover:scale-105 group text-[var(--text-secondary)] group-hover:text-[var(--link-color)] transition-colors"
         title="Av. Principal 123, Ciudad"
       >
         <svg
-          class="w-5 h-5 transition-transform text-primary group-hover:scale-110"
+          class="w-5 h-5 transition-transform group-hover:scale-110"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -54,18 +55,18 @@ const { title = "El Bar Secreto" } = Astro.props;
             stroke-width="2"
             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
-        <span class="hidden font-medium md:inline"
-          >Av. Principal 123, Ciudad</span
-        >
+        <span class="hidden font-medium md:inline ">
+          Av. Principal 123, Ciudad
+        </span>
       </a>
       <a
         href="https://wa.me/+1234567890"
         target="_blank"
-        class="flex items-center space-x-2 transition-colors hover:text-primary group"
+        class="flex items-center space-x-2 transition-all duration-300 hover:scale-105 group text-[var(--text-secondary)] group-hover:text-[var(--link-color)] transition-colors"
         title="+1 234 567 890"
       >
         <svg
-          class="w-4 h-4 transition-transform text-primary group-hover:scale-110"
+          class="w-4 h-4 transition-transform group-hover:scale-110"
           fill="currentColor"
           viewBox="0 0 24 24"
         >
@@ -82,28 +83,45 @@ const { title = "El Bar Secreto" } = Astro.props;
       <ThemeToggle />
       <span
         id="theme-text"
-        class="hidden text-sm font-medium text-secondary md:block"></span>
+        class="hidden text-sm font-medium md:block text-[var(--text-secondary)]"></span>
     </div>
   </div>
 </header>
 
 <script>
-  // Script mejorado
+  // Script mejorado para el manejo del tema
   document.addEventListener("DOMContentLoaded", () => {
     const themeText = document.getElementById("theme-text");
     const toggleButton = document.querySelector(".theme-toggle-btn");
 
-    if (!themeText || !toggleButton) return;
+    if (!themeText || !toggleButton) {
+      console.error("Theme elements not found:", { themeText: !!themeText, toggleButton: !!toggleButton });
+      return;
+    }
 
     const updateThemeText = () => {
       const isDark = document.documentElement.classList.contains("dark");
       themeText.textContent = isDark ? "Oscuro" : "Claro";
+      console.log("Theme text updated to:", themeText.textContent);
     };
 
-    updateThemeText(); // Ejecuta al cargar
+    // Función para manejar cambios de tema
+    const handleThemeChange = () => {
+      updateThemeText();
+    };
 
+    // Actualizar texto inicial
+    updateThemeText();
+
+    // Escuchar cambios del toggle
     toggleButton.addEventListener("click", () => {
-      setTimeout(updateThemeText, 100); // Espera a que se aplique el cambio de tema
+      // Pequeño delay para asegurar que el cambio de clase se haya aplicado
+      setTimeout(handleThemeChange, 50);
     });
+
+    // Escuchar evento personalizado de cambio de tema
+    window.addEventListener("themeChanged", handleThemeChange);
+
+    console.log("Theme text script initialized");
   });
 </script>

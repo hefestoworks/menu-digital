@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 
 <!-- src/components/Footer.astro -->
 <footer
-  class="py-16 border-t bg-neutral-900 text-neutral-300 border-neutral-800"
+  class="py-16 border-t border-[var(--border-color)] bg-[var(--background-color-dark)] text-[var(--text-secondary)] transition-colors duration-300"
 >
   <div class="container px-4 mx-auto">
     <div
@@ -24,12 +24,12 @@ import { Image } from "astro:assets";
             height={48}
           />
           <span
-            class="text-2xl font-black tracking-tight font-heading text-neutral-100"
+            class="text-2xl font-black tracking-tight font-heading text-[var(--text-primary)]"
           >
             El Bar Secreto
           </span>
         </div>
-        <p class="max-w-xs text-sm text-neutral-400 font-body">
+        <p class="max-w-xs text-sm text-[var(--text-secondary)] font-body">
           Escanea el QR y disfruta de una experiencia digital hecha a medida.
         </p>
       </div>
@@ -53,7 +53,7 @@ import { Image } from "astro:assets";
           href="https://wa.me/+1234567890"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center space-x-2 text-sm transition-colors text-neutral-400 hover:text-secondary-300 group"
+          class="flex items-center space-x-2 text-sm transition-colors hover:text-[var(--link-color)] group"
         >
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
             <path
@@ -70,13 +70,13 @@ import { Image } from "astro:assets";
       <div
         class="flex flex-col items-center space-y-2 text-center md:items-end md:text-right"
       >
-        <p class="text-xs text-neutral-500 font-body">
+        <p class="text-xs text-[var(--text-secondary)] font-body">
           © {new Date().getFullYear()} El Bar Secreto
         </p>
-        <p class="max-w-xs text-xs text-neutral-600 font-body">
+        <p class="max-w-xs text-xs text-[var(--text-secondary)] font-body">
           Menú digital diseñado para cautivar y convertir. ¿Quieres uno igual? <a
             href="https://tu-portfolio.com"
-            class="text-secondary-400 hover:underline">Hablemos</a
+            class="text-[var(--link-color)] hover:text-[var(--link-hover-color)] hover:underline transition-colors">Hablemos</a
           >.
         </p>
       </div>
